@@ -1,6 +1,7 @@
 {
   "name": "dashboard",
   "version": "0.1.0",
+  "main": "serve.js",
   "private": true,
   "dependencies": {
     "@ant-design/charts": "^2.0.3",
