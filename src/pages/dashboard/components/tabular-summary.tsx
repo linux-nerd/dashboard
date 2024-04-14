@@ -2,6 +2,7 @@ import { Table, Card, TableColumnsType } from "antd"
 import { Order, Session, useDashboard } from "../dashboard.context"
 
 type AggregatedDataItem = {
+  key: string
   channel: string
   channelGroup: string
   campaignName: string
@@ -19,6 +20,7 @@ const aggregateData = (filteredOrders: Order[], filteredSessions: Session[]): Ag
     const key = `${order.channel}-${order.channelGroup}-${order.campaignName}`
     if (!aggregatedData[key]) {
       aggregatedData[key] = {
+        key,
         channel: order.channel,
         channelGroup: order.channelGroup,
         campaignName: order.campaignName,
@@ -36,6 +38,7 @@ const aggregateData = (filteredOrders: Order[], filteredSessions: Session[]): Ag
     const key = `${session.channel}-${session.channelGroup}-${session.campaignName}`
     if (!aggregatedData[key]) {
       aggregatedData[key] = {
+        key,
         channel: session.channel,
         channelGroup: session.channelGroup,
         campaignName: session.campaignName,
@@ -101,9 +104,10 @@ export const TabularSummary = () => {
     <Card title="Tabular Summary">
       <Table dataSource={data} 
         columns={columns} 
-        pagination={{ pageSize: 10 }} 
-        scroll={{ x: "max-content" }}
-        bordered />
+        size="large"
+        scroll={{ x: 'calc(700px + 50%)', y: 240 }}
+        bordered 
+      />
     </Card>
   )
 }
