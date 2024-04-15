@@ -1,46 +1,24 @@
-# Getting Started with Create React App
+# Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+The dashboard is implemented using React, Typescript and Ant Design UI library.
+It can be accessed here - https://dashboard-os0g.onrender.com/
 
-In the project directory, you can run:
+### List of features
 
-### `npm start`
+1. The data can be filtered globally based on the filters on the top
+2. The selected filters are added to the query params and the dashboard can be shared with different people
+3. High level details are showed in cards below the filters
+4. Aggregated data in a tabular format, with sorting functionality on number fields
+5. Chart showing gross sales per channel. There is an option to choose different value for the X-axis (Channel, ChannelGroup and Campaign)
+6. The UI is responsive.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Run locally
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This repo consists of client and a server. The server needs to be created as the api endpoint provided does have CORS enabled. Inorder to run the app in local env, follow the following steps - 
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Run `npm i` on root
+- Start the server by running `npm start`. This will spin up a server on port 3030
+- Start the client by running `npm run serve`. This will serve the client app on port 3000
+- To run the tests `npm test`
