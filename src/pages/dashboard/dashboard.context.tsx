@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext, ReactNode } from "react"
-import { filterOrdersAndSessions, State } from "../../utils"
+import { Filter, filterOrdersAndSessions, State } from "../../utils"
 
 
 export type Order = {
@@ -12,6 +12,7 @@ export type Order = {
 export type Session = Pick<Order, "campaignName" | "channel" | "channelGroup">
 
 export enum ActionType {
+  SetFilter = "SET_FILTER",
   SetFilterChannel = "SET_FILTER_CHANNEL",
   SetFilterChannelGroup = "SET_FILTER_CHANNEL_GROUP",
   SetFilterCampaignName = "SET_FILTER_CAMPAIGN_NAME",
@@ -20,6 +21,7 @@ export enum ActionType {
 }
 
 type Action =
+  | { type: ActionType.SetFilter; payload: Filter }
   | { type: ActionType.SetFilterChannel; payload: string[] }
   | { type: ActionType.SetFilterChannelGroup; payload: string[] }
   | { type: ActionType.SetFilterCampaignName; payload: string[] }
@@ -48,6 +50,10 @@ const DashboardContext = createContext<{ state: State; dispatch: React.Dispatch<
 // Reducer function
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case ActionType.SetFilter:
+      const updatedFilter = {...action.payload}
+      console.log(updatedFilter)
+      return { ...state, filter: {...updatedFilter}, ...filterOrdersAndSessions(state, updatedFilter) }
     case ActionType.SetFilterChannel:
       const updatedChannelFilter = {...state.filter, channel: [...action.payload]}
       return { ...state, filter: {...updatedChannelFilter}, ...filterOrdersAndSessions(state, updatedChannelFilter) }

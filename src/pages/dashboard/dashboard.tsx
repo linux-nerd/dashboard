@@ -7,6 +7,7 @@ import { SalesPerChannel } from "./components/sales-chart"
 import { Summary } from "./components/summary"
 import { TabularSummary } from "./components/tabular-summary"
 import { ActionType, Order, Session, useDashboard } from "./dashboard.context"
+import { useLocation } from "react-router-dom"
 
 
 export const Dashboard = () => {
@@ -15,6 +16,7 @@ export const Dashboard = () => {
   const {get: getOrders, data: ordersData, isLoading: ordersIsLoading} = useFetch<Order[] | null>()
   const {get: getSessions, data: sessionsData, isLoading: sessionsIsLoading} = useFetch<Session[] | null>()
   const { state, dispatch } = useDashboard()
+  const location = useLocation();
 
   const {orders, sessions} = state
   const isLoading = ordersIsLoading || sessionsIsLoading
@@ -34,6 +36,18 @@ export const Dashboard = () => {
   useEffect(() => {
     if(orders.length && sessions.length) {
       setFilterOptions(generateFilterOptions(orders, sessions))
+      const queryParams = new URLSearchParams(location.search)
+      const channel = queryParams.get("channel")
+      const channelGroup = queryParams.get("channelGroup")
+      const campaign = queryParams.get("campaign")
+      
+      const filters = {
+        channel: channel ? channel.split(",") : [],
+        channelGroup: channelGroup ? channelGroup.split(",") : [],
+        campaign: campaign ? campaign.split(",") : [],
+      }
+
+    dispatch({ type: ActionType.SetFilter, payload: filters });
     }
   }, [orders, sessions])
 
